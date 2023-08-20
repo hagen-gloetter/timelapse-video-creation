@@ -34,7 +34,8 @@ else
 fi
 
 
-OutFile=$DIR_SRCIMG/$DIR_MP4/"ffmpeg-timeleape"$(date +"-%Y-%m-%d--%H-%M")".mp4"
+OutFile720=$DIR_SRCIMG/$DIR_MP4/"ffmpeg-timeleape"$(date +"-%Y-%m-%d--%H-%M")"_720p.mp4"
+OutFile1080=$DIR_SRCIMG/$DIR_MP4/"ffmpeg-timeleape"$(date +"-%Y-%m-%d--%H-%M")"_1080.mp4"
 #Sound=$baseDir"/nop/SoundCloud-SHAPING_LIGHTS.v2.mp3"
 
 # Functions
@@ -93,14 +94,17 @@ echo "-----------------------------------------"
 # -- working ones with sound
 #CMD="ffmpeg -thread_queue_size 1024 -framerate 30 -pattern_type glob -i \"$DIR_SRCIMG/*.jpg\" -i $Sound -vf deshake -c:v libx264 -acodec copy -flags global_header -pix_fmt yuv420p -s 1280x720  $OutFile"
 #CMD="ffmpeg -thread_queue_size 1024 -framerate 24 -pattern_type glob -i \"$DIR_SRCIMG/*.jpg\" -i $Sound   -c:v libx264 -acodec copy -flags global_header -pix_fmt yuv420p -s 1280x720  $OutFile"
-CMD="$FFMPEG -thread_queue_size 1024 -framerate 24 -pattern_type glob -i \"$DIR_SRCIMG/*.jpg\" $Sound -c:v libx264 -acodec copy -flags global_header -pix_fmt yuv420p -s 1280x720  $OutFile"
+CMD1="$FFMPEG -thread_queue_size 1024 -framerate 24 -pattern_type glob -i \"$DIR_SRCIMG/*.jpg\" $Sound -c:v libx264 -acodec copy -flags global_header -pix_fmt yuv420p -s 1280x720  $OutFile720"
+CMD2="$FFMPEG -thread_queue_size 1024 -framerate 24 -pattern_type glob -i \"$DIR_SRCIMG/*.jpg\" $Sound -c:v libx264 -acodec copy -flags global_header -pix_fmt yuv420p -s 1920x1080  $OutFile1080 "
 #CMD="ffmpeg -thread_queue_size 1024 -framerate 24 -pattern_type glob -i \"$DIR_SRCIMG/*.JPG\"   -c:v libx265 -acodec copy -flags global_header -pix_fmt yuv420p -s 1280x720  $OutFile"
 
 
 echo "-----------------------------------------"
-echo "$CMD"
+echo "$CMD1"
+echo "$CMD2"
 echo "-----------------------------------------"
-eval "$CMD"
+eval "$CMD1"
+eval "$CMD2"
 cd "$baseDir" || exit 1
 
 #ffmpeg -framerate 30 -pattern_type glob -i '*.jpg' -c:v libx264 ../ffmpeg-out-test.mp4
