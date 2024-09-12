@@ -25,12 +25,12 @@ DIR_MP4="h265"
 EXT="jpg"
 
 # Überprüfen, ob ffmpeg installiert ist
-if ! command -v ffmpeg &> /dev/null; then
+if ! command -v ffmpeg &>/dev/null; then
     echo "ffmpeg NOT found"
     exit 1
 fi
 
-FFMPEG=$(command -v ffmpeg)  # Initialisiere FFMPEG korrekt
+FFMPEG=$(command -v ffmpeg) # Initialisiere FFMPEG korrekt
 
 # Überprüfen, ob das Quellbildverzeichnis existiert
 if [ ! -d "$DIR_SRCIMG" ]; then
@@ -55,7 +55,7 @@ OutFile1080="$DIR_SRCIMG/$DIR_MP4/ffmpeg-timelapse_${timestamp}_1080p.mp4"
 # Funktion, um ein Verzeichnis zu überprüfen und zu erstellen
 check_and_create_DIR() {
     DIR=$1
-    if [ ! -d "$DIR" ];then
+    if [ ! -d "$DIR" ]; then
         echo "Info: ${DIR} not found. Creating."
         mkdir -p "$DIR"
     fi
